@@ -34,16 +34,7 @@
         </tbody>
       </table>
     </div>
-    <nav>
-      <ul class="pagination">
-        <li class="page-item">
-          <a class="page-link" href="javascript:void(0)" @click="prev">Previous</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="javascript:void(0)" @click="next">Next</a>
-        </li>
-      </ul>
-    </nav>
+    <Paginator :last-page="lastPage" @page-changed="load($event)"/>
   </div>
 </template>
 
@@ -51,32 +42,24 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { Entity } from "@/interfaces/entity";
+import Paginator from "@/secure/components/Paginator.vue";
 
 export default {
   name: "Users",
 
+  components: {
+    Paginator
+  },
+
   setup() {
     const users = ref([]);
-    const page = ref(1);
     const lastPage = ref(0);
 
-    const load = async () => {
-      const response = await axios.get(`users?page=${page.value}`);
+    const load = async (page = 1) => {
+      const response = await axios.get(`users?page=${page}`);
 
       users.value = response.data.data;
       lastPage.value = response.data.meta.last_page;
-    }
-
-    const next = async () => {
-      if (page.value === lastPage.value) return;
-      page.value++;
-      await load();
-    }
-
-    const prev = async () => {
-      if (page.value === 1) return;
-      page.value--;
-      await load();
     }
 
     const del = async (id: number) => {
@@ -91,9 +74,9 @@ export default {
 
     return {
       users,
-      next,
-      prev,
-      del
+      del,
+      load,
+      lastPage
     }
   }
 }
