@@ -3,6 +3,7 @@ import Register from '@/public/Register.vue';
 import Login from '@/public/Login.vue';
 import Secure from '@/secure/Secure.vue';
 import Users from '@/secure/users/Users.vue';
+import UsersCreate from '@/secure/components/UsersCreate.vue';
 import Dashboard from '@/secure/dashboard/Dashboard.vue';
 
 const routes: Array<RouteRecordRaw> = [
@@ -15,6 +16,7 @@ const routes: Array<RouteRecordRaw> = [
       { path: '', redirect: '/dashboard'},
       { path: '/dashboard', component: Dashboard },
       { path: '/users', component: Users },
+      { path: '/users/create', component: UsersCreate },
     ]
   }
 ]
