@@ -12,7 +12,10 @@ import Roles from '@/secure/roles/Roles.vue';
 import RolesCreate from "@/secure/roles/RolesCreate.vue";
 import RolesEdit from "@/secure/roles/RolesEdit.vue";
 
+import Products from "@/secure/products/Products.vue";
+
 import Dashboard from '@/secure/dashboard/Dashboard.vue';
+
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -30,6 +33,7 @@ const routes: Array<RouteRecordRaw> = [
       { path: '/roles', component: Roles },
       { path: '/roles/create', component: RolesCreate },
       { path: '/roles/:id/edit', component: RolesEdit },
+      { path: '/products', component: Products },
     ]
   }
 ]

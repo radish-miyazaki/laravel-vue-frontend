@@ -50,7 +50,7 @@
 <script lang="ts">
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
-import {Entity} from "@/interfaces/entity";
+import { Entity } from "@/interfaces/entity";
 
 export default {
   name: "Users",
