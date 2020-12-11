@@ -16,8 +16,8 @@
 
 <script>
 import { onMounted, ref } from 'vue';
-import Menu from '@/components/Menu.vue';
-import Nav from '@/components/Nav.vue';
+import Menu from '@/secure/components/Menu.vue';
+import Nav from '@/secure/components/Nav.vue';
 import axios from 'axios';
 import { useRouter } from "vue-router";
 
