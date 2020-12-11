@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     component: Secure,
     children: [
-      { path: '',redirect: '/dashboard'},
+      { path: '', redirect: '/dashboard'},
       { path: '/dashboard', component: Dashboard },
       { path: '/users', component: Users },
     ]
