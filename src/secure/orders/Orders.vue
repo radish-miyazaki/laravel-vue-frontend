@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <div class="btn-toolbar mb-2 mb-md-0">
-      <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary">Export</a>
+      <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary" @click="exportFile">Export</a>
     </div>
   </div>
 
@@ -57,12 +57,23 @@ export default {
       lastPage.value = response.data.meta.last_page;
     }
 
+    const exportFile = async () => {
+      const response = await axios.get('export', {responseType: 'blob'});
+      const blob = new Blob([response.data], {type: 'text/csv'});
+      const downloadUrl = window.URL.createObjectURL(response.data);
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = 'orders.csv';
+      link.click();
+    }
+
     onMounted(load);
 
     return {
       orders,
       lastPage,
-      load
+      load,
+      exportFile
     }
   }
 }
