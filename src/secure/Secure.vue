@@ -7,7 +7,7 @@
         <Menu />
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <router-view />
+          <router-view v-if="user" />
         </main>
       </div>
     </div>
@@ -20,6 +20,7 @@ import Menu from '@/secure/components/Menu.vue';
 import Nav from '@/secure/components/Nav.vue';
 import axios from 'axios';
 import { useRouter } from "vue-router";
+import { useStore } from 'vuex';
 
 export default {
   name: 'Secure',
@@ -27,12 +28,17 @@ export default {
   setup() {
     const router = useRouter();
     const user = ref(null);
+    const store = useStore();
 
     onMounted(async () => {
       try {
         // エラーが出る箇所 /////////////////////////////
         const response = await axios.get('user');
+
+        await store.dispatch('setUser', response.data.data);
+
         user.value = response.data.data;
+
       } catch(e) {
         await router.push('/login');
       }

@@ -37,9 +37,9 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
-import User from '@/classes/user';
+import { useStore } from "vuex";
 
 export default {
   name: "Profile",
@@ -50,23 +50,24 @@ export default {
     const email = ref('');
     const password = ref('');
     const passwordConfirm = ref('');
+    const store = useStore();
 
     onMounted(async () => {
-      const response = await axios.get('user');
+      const user = computed(() => store.state.user);
 
-      const user: User = response.data.data;
-
-      firstName.value = user.first_name;
-      lastName.value  = user.last_name;
-      email.value  = user.email;
+      firstName.value = user.value.first_name;
+      lastName.value  = user.value.last_name;
+      email.value  = user.value.email;
     });
 
     const submitInfo = async () => {
-      await axios.put('users/info', {
+      const response = await axios.put('users/info', {
         first_name: firstName.value,
         last_name: lastName.value,
         email: email.value,
       });
+
+      await store.dispatch('setUser', response.data);
     };
 
     const submitPassword = async () => {
