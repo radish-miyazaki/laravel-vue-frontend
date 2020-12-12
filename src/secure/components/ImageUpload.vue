@@ -4,15 +4,15 @@
   </label>
 </template>
 
-<script lang="ts">
+<script>
 import axios from "axios";
 
 export default {
   name: "ImageUpload",
   emits: ['file-uploaded'],
 
-  setup(_, context) {
-    const upload = async (files: FileList) => {
+  setup(props, context) {
+    const upload = async (files) => {
       const file = files.item(0);
 
       const data = new FormData;
