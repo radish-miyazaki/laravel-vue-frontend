@@ -53,7 +53,7 @@ export default {
     const store = useStore();
 
     onMounted(async () => {
-      const user = computed(() => store.state.user);
+      const user = computed(() => store.state.User.user);
 
       firstName.value = user.value.first_name;
       lastName.value  = user.value.last_name;
