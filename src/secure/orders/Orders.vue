@@ -36,9 +36,10 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import Paginator from "@/secure/components/Paginator";
+import { useStore } from "vuex";
 
 export default {
   name: "Orders",
@@ -50,6 +51,9 @@ export default {
   setup() {
     const orders = ref([]);
     const lastPage = ref(0);
+    const store = useStore();
+
+    const authenticatedUser = computed(() => store.state.User.user);
 
     const load = async (page = 1) => {
       const response = await axios.get(`orders?page=${page}`);
@@ -73,7 +77,8 @@ export default {
       orders,
       lastPage,
       load,
-      exportFile
+      exportFile,
+      authenticatedUser
     }
   }
 }

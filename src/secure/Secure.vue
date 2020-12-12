@@ -28,7 +28,7 @@ export default {
 
   setup() {
     const router = useRouter();
-    const user = ref(null);
+    const user = ref(null as any);
     const store = useStore();
 
     onMounted(async () => {
