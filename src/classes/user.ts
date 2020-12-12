@@ -17,4 +17,8 @@ export class User implements Entity {
         this.role = role;
         this.permissions = permissions;
     }
+
+    get name() {
+        return this.first_name + ' ' + this.last_name;
+    }
 }

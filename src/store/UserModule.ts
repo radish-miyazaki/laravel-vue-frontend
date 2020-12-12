@@ -4,7 +4,7 @@ import { Commit } from 'vuex';
 export default {
     namespace: true,
     state: {
-        user: null
+        user: new User()
     },
     mutations: {
         SET_USER: (state: {user: User}, user: User) => state.user = user
