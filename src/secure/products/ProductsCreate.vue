@@ -12,6 +12,9 @@
       <label>Image</label>
       <div class="input-group-append">
         <input type="text" class="form-control" name="Image" v-model="image"/>
+        <label class="btn btn-primary">
+          Upload <input type="file" hidden @change="change($event.target.files)" />
+        </label>
       </div>
     </div>
     <div class="form-group">
@@ -22,7 +25,7 @@
   </form>
 </template>
 
-<script>
+<script lang="ts">
 import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from "vue-router";
@@ -48,12 +51,24 @@ export default {
       await router.push('/products');
     };
 
+    const change = async (files: FileList) => {
+      const file = files.item(0);
+
+      const data = new FormData;
+      data.append('image', file);
+
+      const response = await axios.post('upload', data);
+
+      image.value = response.data.url;
+    };
+
     return {
       title,
       description,
       image,
       price,
-      submit
+      submit,
+      change
     }
   }
 
