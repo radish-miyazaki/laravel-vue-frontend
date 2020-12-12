@@ -20,7 +20,7 @@ import Orders from '@/secure/orders/Orders.vue';
 import OrderItems from '@/secure/orders/OrderItems.vue';
 
 import Dashboard from '@/secure/dashboard/Dashboard.vue';
-
+import Profile from '@/secure/profile/Profile.vue';
 
 const routes: Array<RouteRecordRaw> = [
   { path: '/register', component: Register },
@@ -31,6 +31,8 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       { path: '', redirect: '/dashboard'},
       { path: '/dashboard', component: Dashboard },
+
+      { path: 'profile', component: Profile },
 
       { path: '/users', component: Users },
       { path: '/users/create', component: UsersCreate },
