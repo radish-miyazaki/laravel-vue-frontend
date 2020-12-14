@@ -40,7 +40,7 @@
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import { useStore } from "vuex";
-import {User} from "@/classes/user";
+import { User } from "@/classes/user";
 
 export default {
   name: "Profile",
